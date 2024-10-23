@@ -1,8 +1,11 @@
 from os import system
+import os
 import time
 import conexion as conn
+
 db = conn.DB()
-system("clear")
+os.system('cls')
+
 def create():
     name = str(input("Ingrese nombre: "))
     email = str(input("Ingrese email: "))
@@ -10,8 +13,8 @@ def create():
         sql = "INSERT INTO personas(name,email) VALUES(?,?)"
         parametros = (name,email)
         db.ejecutar_consulta(sql,parametros)
-        print(conn.sqlite3_log())
         print("Insertado ok")
+
 def read():
     sql = "SELECT * FROM personas"
     result = db.ejecutar_consulta(sql)
@@ -21,6 +24,7 @@ def read():
         NOMBRE :    {}
         EMAIL :     {}
         """.format(data[0],data[1],data[2]))
+
 def update():
     id = int(input("Ingrese Id: "))
     if(id != 0):
@@ -33,6 +37,7 @@ def update():
             print("Actualizado ok!")
     else:
         print("Es requerido el Id")
+
 def delete():
     id = int(input("Ingrese Id: "))
     if(id != 0):
@@ -42,6 +47,7 @@ def delete():
         print("Eliminado ok!")
     else:
         print("Es requerido el Id")
+
 def search():
     nombre = str(input("Buscar por nombre: "))
     if(len(nombre) > 0):
@@ -53,6 +59,7 @@ def search():
             +ID :        {}
             +NOMBRE :    {}
             +EMAIL :     {}""".format(data[0],data[1],data[2]))
+
 while True:
     print("=========================================")
     print("\tSistema de Administracion de Usuarios")
@@ -70,23 +77,22 @@ while True:
         if(opcion == 1):
             create()
             time.sleep(2)
-            system("clear")
+            os.system('cls')
         elif (opcion == 2):
             read()
             time.sleep(2)
         elif (opcion == 3):
             update()
             time.sleep(2)
-            system("clear")
+            os.system('cls')
         elif (opcion == 4):
             delete()
             time.sleep(2)
-            system("clear")
+            os.system('cls')
         elif (opcion == 5):
             search()
-
         elif (opcion == 6):
             break
     except:
         print("Opcion incorrecta. Intente nuevamente.")
-        system("clear")
+        os.system('cls')
